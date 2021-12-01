@@ -49,6 +49,6 @@ class Board{
                 uno.innerHTML = lista[i];           
             }    
     }
-}
 
+}
 
