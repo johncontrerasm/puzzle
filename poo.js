@@ -91,9 +91,23 @@ class Square{
                 var j=0;
                 for (let i = 0 ; i < lista.length; i++ )
                     {
+                        if (lista[i] == "" ) 
+                            Square[i] = new Square(lista[i],"Rojo",1);
+                        else
+                            Square[i] = new Square(lista[i],"Rojo",0);
                         var uno = document.getElementById('b'+i);
                         uno.innerHTML = lista[i];           
-                    }    
+                    }
+
+                        console.log("Valores CUADRADOs")
+                        console.log("ID + swapable :"+ Square[0].ID , Square[0].isSwapable)
+                        console.log("ID + swapable :"+ Square[1].ID , Square[1].isSwapable)
+                        console.log("ID + swapable :"+ Square[2].ID , Square[2].isSwapable)
+                        console.log("ID + swapable :"+ Square[4].ID , Square[3].isSwapable)
+                        console.log("ID + swapable :"+ Square[5].ID , Square[5].isSwapable)
+                        console.log("ID + swapable :"+ Square[6].ID , Square[6].isSwapable)
+                        console.log("ID + swapable :"+ Square[7].ID , Square[7].isSwapable)
+                        console.log("ID + swapable :"+ Square[8].ID , Square[8].isSwapable)
         
             }
 
@@ -127,18 +141,25 @@ var lista = [1,2,3,4,5,6,7,8,""];
 lista = lista.sort(function() {return Math.random() - 0.5});
 let Squares = []
 for (let i = 0 ; i < lista.length; i++ )
-{
-    Square[i] = new Square(lista[i],"Rojo",0);
+{   
+    if (lista[i] == "" ) 
+        Square[i] = new Square(lista[i],"Rojo",1);
+    else
+        Square[i] = new Square(lista[i],"Rojo",0);
+
     var uno = document.getElementById('b'+i);
     uno.innerHTML = lista[i]; 
 }
 
 console.log("Valores CUADRADOs")
-console.log(Square[0].ID)
-console.log(Square[1].ID)
-console.log(Square[2].ID)
-console.log(Square[3].ID)
-
+console.log("ID + swapable :"+ Square[0].ID , Square[0].isSwapable)
+console.log("ID + swapable :"+ Square[1].ID , Square[1].isSwapable)
+console.log("ID + swapable :"+ Square[2].ID , Square[2].isSwapable)
+console.log("ID + swapable :"+ Square[4].ID , Square[3].isSwapable)
+console.log("ID + swapable :"+ Square[5].ID , Square[5].isSwapable)
+console.log("ID + swapable :"+ Square[6].ID , Square[6].isSwapable)
+console.log("ID + swapable :"+ Square[7].ID , Square[7].isSwapable)
+console.log("ID + swapable :"+ Square[8].ID , Square[8].isSwapable)
 
 
 //Reiniciar el tablero
@@ -149,5 +170,9 @@ function restart(){
     Square[0].restart();
 }
 
+function processClick(evento){
+    console.log(evento)
+
+}
 
 
