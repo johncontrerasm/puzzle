@@ -109,10 +109,10 @@ class Square{
 //Objeto Board
 
 const Board1 = new Board(5,
-"* El objetivo es colocar los números 1,2,3 en la primera fila, 4,5,6 en la segunda y 7,8 en la tercera.\n " 
+("* El objetivo es colocar los números 1,2,3 en la primera fila, 4,5,6 en la segunda y 7,8 en la tercera.\n " 
 +"* La celda vacía debe quedar en la esquina inferior derecha. \n"
 +"* Al presionar un botón con numero si la celda presionada, tiene una celda vacía vecina, esta celda ocupará la celda vacía. \n"
-+"* Si se presiona una celda sin tener la celda vacía de vecina, se contará como un movimiento."
++"* Si se presiona una celda sin tener la celda vacía de vecina, se contará como un movimiento.")
 );
 console.log(Board1.movementsCounter);
 Board1.movementsCounter=1000
@@ -144,10 +144,6 @@ console.log(Square[3].ID)
 //Reiniciar el tablero
 //Square.restart();
 
-//Obtener las instrucciones
-function showInstructions(){
-    alert(Board1.instructions);
-}
 
 function restart(){
     Square[0].restart();

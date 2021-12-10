@@ -160,3 +160,10 @@ function calculateMovementsCount(count) {
   let displayNumber = document.getElementById("movement-count");
   displayNumber.innerHTML = "Movements count: " + count + "";
 }
+
+//Obtener las instrucciones
+function showInstructions(){
+  console.log("Mensaje para ver si la funcion se ejecuta 2");
+  alert(Board1.instructions);
+
+}
