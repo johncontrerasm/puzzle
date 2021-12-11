@@ -2,11 +2,15 @@ const _private = new WeakMap();
 
 class Board{
 
-    constructor(movementsCounter,instructions){
-
+    constructor(movementsCounter){
         const properties ={    
             _movementsCounter : movementsCounter,
-            _instructions : instructions,
+            _instructions : "* El objetivo es colocar los números 1,2,3 en la primera fila, 4,5,6 en la segunda y 7,8 en la tercera.\n " 
+            +"* La celda vacía debe quedar en la esquina inferior derecha. \n"
+            +"* Al presionar un botón con numero si la celda presionada, tiene una celda vacía vecina, esta celda ocupará la celda vacía. \n"
+            +"* Si se presiona una celda sin tener la celda vacía de vecina, se contará como un movimiento.",
+            
+            
         }
 
         _private.set(this, {properties})
@@ -37,19 +41,18 @@ class Board{
 
     isGridSorted(){
         console.log("False");
-    } 
-
+    }
 
 }
 
 class Square{
 
-    constructor(ID,color,isSwapable){
+    constructor(ID,color,coordenadas){
 
         const properties ={    
             _ID : ID,
             _color: color,
-            _isSwapable: isSwapable
+            _coordenadas: coordenadas
         }
     
             _private.set(this, {properties})
@@ -74,43 +77,17 @@ class Square{
                 return _private.get(this).properties['_ID'] = id;
             }
 
-            get isSwapable(){
+/*             get isSwapable(){
                 return _private.get(this).properties['_isSwapable'];
             }
         
             set isSwapable(state){
                 return _private.get(this).properties['_isSwapable'] = state;
+            } */
+
+            isSwapable(Square ){
+                console.log("Muchos movimientos");
             }
-        
-
-            restart(){
-                console.log("Reiniciando el juego");
-                var lista = [1,2,3,4,5,6,7,8,""];
-                lista = lista.sort(function() {return Math.random() - 0.5});
-                console.log (lista)
-                var j=0;
-                for (let i = 0 ; i < lista.length; i++ )
-                    {
-                        if (lista[i] == "" ) 
-                            Square[i] = new Square(lista[i],"Rojo",1);
-                        else
-                            Square[i] = new Square(lista[i],"Rojo",0);
-                        var uno = document.getElementById('b'+i);
-                        uno.innerHTML = lista[i];           
-                    }
-
-                        console.log("Valores CUADRADOs")
-                        console.log("ID + swapable :"+ Square[0].ID , Square[0].isSwapable)
-                        console.log("ID + swapable :"+ Square[1].ID , Square[1].isSwapable)
-                        console.log("ID + swapable :"+ Square[2].ID , Square[2].isSwapable)
-                        console.log("ID + swapable :"+ Square[4].ID , Square[3].isSwapable)
-                        console.log("ID + swapable :"+ Square[5].ID , Square[5].isSwapable)
-                        console.log("ID + swapable :"+ Square[6].ID , Square[6].isSwapable)
-                        console.log("ID + swapable :"+ Square[7].ID , Square[7].isSwapable)
-                        console.log("ID + swapable :"+ Square[8].ID , Square[8].isSwapable)
-        
-            }
-
 
 }
 
@@ -122,57 +99,42 @@ class Square{
 
 //Objeto Board
 
-const Board1 = new Board(5,
-("* El objetivo es colocar los números 1,2,3 en la primera fila, 4,5,6 en la segunda y 7,8 en la tercera.\n " 
-+"* La celda vacía debe quedar en la esquina inferior derecha. \n"
-+"* Al presionar un botón con numero si la celda presionada, tiene una celda vacía vecina, esta celda ocupará la celda vacía. \n"
-+"* Si se presiona una celda sin tener la celda vacía de vecina, se contará como un movimiento.")
-);
-console.log(Board1.movementsCounter);
-Board1.movementsCounter=1000
-console.log(Board1.movementsCounter);
-console.log(Board1.instructions);
-Board1.calculateMovementsCounter();
-Board1.isGridSorted();
+const Board1 = new Board(0);
+restartManual();
 
-//Objetos Cuadrado
 
-var lista = [1,2,3,4,5,6,7,8,""];
-lista = lista.sort(function() {return Math.random() - 0.5});
-let Squares = []
-for (let i = 0 ; i < lista.length; i++ )
-{   
-    if (lista[i] == "" ) 
-        Square[i] = new Square(lista[i],"Rojo",1);
-    else
-        Square[i] = new Square(lista[i],"Rojo",0);
 
-    var uno = document.getElementById('b'+i);
-    uno.innerHTML = lista[i]; 
+function restartManual(){
+  
+        console.log("Reiniciando el tablero");
+        var lista = [1,2,3,4,5,6,7,8,""];
+        var coordenadas = [{ x: 0, y: 0 },{ x: 0, y: 1 },{ x: 0, y: 2 }, 
+                          { x: 1, y: 0 },{ x: 1, y: 1 },{ x: 1, y: 2 },
+                          { x: 2, y: 0 },{ x: 2, y: 1 },{ x: 2, y: 2 }]
+        console.log(coordenadas[0])
+        let squares = []
+        lista = lista.sort(function() {return Math.random() - 0.5});
+        console.log (lista)
+        for (let i = 0 ; i < lista.length; i++ )
+            {                        
+                squares[i] = new Square(lista[i],"Rojo",coordenadas[i]);
+                var uno = document.getElementById('b'+i);
+                uno.innerHTML = lista[i];           
+            }
 }
 
-console.log("Valores CUADRADOs")
-console.log("ID + swapable :"+ Square[0].ID , Square[0].isSwapable)
-console.log("ID + swapable :"+ Square[1].ID , Square[1].isSwapable)
-console.log("ID + swapable :"+ Square[2].ID , Square[2].isSwapable)
-console.log("ID + swapable :"+ Square[4].ID , Square[3].isSwapable)
-console.log("ID + swapable :"+ Square[5].ID , Square[5].isSwapable)
-console.log("ID + swapable :"+ Square[6].ID , Square[6].isSwapable)
-console.log("ID + swapable :"+ Square[7].ID , Square[7].isSwapable)
-console.log("ID + swapable :"+ Square[8].ID , Square[8].isSwapable)
 
-
-//Reiniciar el tablero
-//Square.restart();
-
-
-function restart(){
-    Square[0].restart();
-}
 
 function processClick(evento){
-    console.log(evento)
+    console.log(evento.innerHTML)
+ //   console.log(Square[evento.innerHTML].ID)
+    console.log(evento.value)
+    console.log(evento.id)
 
+}
+
+function showInstructions(){
+    alert(Board1.instructions);
 }
 
 
