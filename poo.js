@@ -156,7 +156,7 @@ class Board {
         uno.innerHTML = this._squares[posicion].ID;
         var uno = document.getElementById('b' + posicionvacia);
         uno.innerHTML = this._squares[posicionvacia].ID;
-        
+        leo se tiró en esto 
     }
 
     restartManual() {
