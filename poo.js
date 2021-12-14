@@ -31,10 +31,8 @@ class Square {
         return _private.get(this).properties['_ID'] = id;
     }
 
-
     imEmpty() {
-        //return ID == "";
-        return ID;
+        return this.ID == ""; 
     }
 }
 
@@ -117,32 +115,36 @@ class Board {
             return miPosicion + 3
     }
 
-
     isSwapable(posicion) {
-        var pos;
+        var posVacio = 0;
+        var pos = 0;
         var VacioEs = -1;
+        for (var i=0;i<this._squares.length; i++){
+            if (this._squares[i].imEmpty() == true){
+                posVacio = i
+            }    
+        }
         pos = this.myleft(posicion);
-        if (pos !== -1)
-            if (this._squares[pos].ID == "")
-                VacioEs = pos
-        if (VacioEs == -1)
+        if ((pos !== -1) && (pos==posVacio))
+            VacioEs = pos
+        if (VacioEs == -1){
             pos = this.myRight(posicion);
-            if (pos !== -1)
-                if (this._squares[pos].imEmpty == "")
-                    VacioEs = pos   
-        if (VacioEs == -1)
+            if ((pos !== -1) && (pos==posVacio))
+                VacioEs = pos
+        }   
+        if (VacioEs == -1){
             pos = this.inMyUp(posicion);
-            if (pos !== -1)
-                if (this._squares[pos].imEmpty == "")
-                    VacioEs = pos
-        if (VacioEs == -1)
-            pos = this.inMyUp(posicion);
-            if (pos !== -1)
-                if (this._squares[pos].imEmpty == "")
-                    VacioEs = pos
+            if ((pos !== -1) && (pos==posVacio))
+                VacioEs = pos
+        }
+        if (VacioEs == -1){
+            pos = this.inMyDown(posicion);
+            if ((pos !== -1) && (pos==posVacio))
+                VacioEs = pos
+        }
+        
         return VacioEs                    
     }
-
 
     swap(posicion,posicionvacia){
 
