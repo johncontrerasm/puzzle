@@ -152,6 +152,7 @@ class Board {
       var uno = document.getElementById("b" + i);
       uno.innerHTML = lista[i];
     }
+    this.setmovementsCounter(0);
   }
 
   workOnClick(posicion) {
@@ -193,4 +194,6 @@ function showInstructions() {
 
 function restartManualDOM() {
   Board1.restartManual();
+  var uno = document.getElementById("movement-count");
+  uno.innerHTML = "Movs: " + Board1.movementsCounter();
 }
