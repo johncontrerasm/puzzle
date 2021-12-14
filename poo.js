@@ -69,13 +69,20 @@ class Board {
             Metodos funcionales
     */
 
-    calculateMovementsCounter() {
+    registreMovementsCounter() {
         this._movementsCounter++;
-        console.log("Muchos movimientos"+this._movementsCounter);
     }
 
     isGridSorted() {
-        console.log("False");
+        var lista = [1, 2, 3, 4, 5, 6, 7, 8, ""];
+        var ok=true;
+        for (var i=0 ; i < this._squares.length ; i++ ){
+            
+            if (this._squares[i].ID != lista[i] )
+                ok = false
+                break;         
+        }
+        return ok;     
     }
 
 
@@ -156,14 +163,13 @@ class Board {
         uno.innerHTML = this._squares[posicion].ID;
         var uno = document.getElementById('b' + posicionvacia);
         uno.innerHTML = this._squares[posicionvacia].ID;
-        leo se tiró en esto 
+
     }
 
     restartManual() {
 
         var lista = [1, 2, 3, 4, 5, 6, 7, 8, ""];
         lista = lista.sort(function () { return Math.random() - 0.5 });
-        console.log(lista)
         for (let i = 0; i < lista.length; i++) {
             this._squares[i] = new Square(lista[i], "Rojo");
             var uno = document.getElementById('b' + i);
@@ -172,9 +178,7 @@ class Board {
     }
 
     workOnClick(posicion){
-        console.log("workonclic"+ this._squares)
         let vacio=this.isSwapable(posicion)
-        console.log("Vacio " +vacio)
         if (vacio != -1){
             this.swap(posicion,vacio);
         }
@@ -202,23 +206,21 @@ Board1.restartManual();
 
 
 function processClick(evento) {
-    // console.log(evento.innerHTML)
-    console.log(evento.id.charAt(1)) //posicion boton
-    console.log(Board1.inMyDown(evento.id.charAt(1)));  
+
     posicion=evento.id.charAt(1);
-    Board1.calculateMovementsCounter();
+    Board1.registreMovementsCounter();
     Board1.workOnClick(parseInt(posicion));
-/*     console.log("CUADRADOS"+squares);
-    console.log("VALOR"+squares[posicion].ID)
-    console.log("IZQ"+Board1.myleft(posicion));
-    console.log("DER"+Board1.myRight(posicion));
-    console.log("UP"+Board1.inMyUp(posicion));
-    console.log("DOWN"+Board1.inMyDown(posicion)); */
+    var uno = document.getElementById("movement-count");
+    uno.innerHTML = "Movs: " +Board1.movementsCounter();
+    if (Board1.isGridSorted()){
+        alert("Lo Logro en " + Board1.movementsCounter() + " moviemientos \n REINICIANDO EL TABLERO");
+        Board1.restartManual();
+    }
 
 }
 
 function showInstructions() {
-    alert(Board1.instructions);
+    alert(Board1.instructions());
 }
 
 function restartManualDOM(){
