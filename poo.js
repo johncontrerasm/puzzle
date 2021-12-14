@@ -148,20 +148,14 @@ class Board {
 
     swap(posicion,posicionvacia){
 
-        console.log("Posicion "+ posicion)
-        console.log("Posicion Vacia "+ posicionvacia)
+        var squaretemp=this._squares[posicion];
+        this._squares[posicion]=this._squares[posicionvacia];
+        this._squares[posicionvacia]=squaretemp;
+        
         var uno = document.getElementById('b' + posicion);
-        console.log("TEST "+ this._squares[posicion].ID)
         uno.innerHTML = this._squares[posicion].ID;
         var uno = document.getElementById('b' + posicionvacia);
         uno.innerHTML = this._squares[posicionvacia].ID;
-        
-
-
-        var posicion1=parseInt(posicion);   
-        var squaretemp=this._squares[posicion1];
-        this._squares[posicion1]=this._squares[posicionvacia];
-        this._squares[posicionvacia]=squaretemp;
         
     }
 
