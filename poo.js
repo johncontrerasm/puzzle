@@ -78,9 +78,10 @@ class Board {
         var ok=true;
         for (var i=0 ; i < this._squares.length ; i++ ){
             
-            if (this._squares[i].ID != lista[i] )
+            if (this._squares[i].ID != lista[i] ){
                 ok = false
                 break;         
+            }
         }
         return ok;     
     }
